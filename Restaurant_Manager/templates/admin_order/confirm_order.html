@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+    {% block title_block %}
+    <title>Confirm Order</title>
+    {% endblock %}
+
+    {% block body_block %}
+      <div class='jumbotron'>
+        <h5>Manager: {{ order_data.man_name }}</h5>
+        <h5>Waiter: {{ order_data.emp_name }}</h5>
+        <h5>Table no: {{ order_data.table_no }}</h5>
+        <table width="100%"  border="1">
+          <tr style="background-color:lightgray">
+            <th>Item Name</th>
+            <th>Quantity</th>
+          </tr>
+          {% for row in ordered_items %}
+          <tr>
+            <td>{{row.food_name}}</td>
+            <td>{{row.quantity}}</td>
+         </tr>
+         {% endfor %}
+        </table>
+        <br>
+        <form  method="post"> {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Confirm order</button>
+        </form>
+      </div>
+
+      <style>
+        td { text-align: center }
+        th { text-align: center }
+      </style>
+
+    {% endblock %}}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends "customer_login/home_login.html" %}
+{% load static %}
+
+{% block title_block %}
+<title>Store</title>
+{% endblock %}
+
+{% block body_block %}
+<div class="st">
+  <br><br>
+  <div class="col-lg-4">
+    <form method="post" align="center">
+      {% csrf_token %}
+      <input type="text" name="search_area" value="">
+      <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      <!-- <input type="hidden" name = "search_hidden" value="1"> -->
+    </form>
+  </div>
+  <br>
+  <div class="row">
+  {% for row in dict %}
+  <div class="col-lg-4">
+    <img class="thumbnail" src="{% static row.pic %}">
+    <div class="box-element product">
+      <h6><strong>{{row.name}}</strong></h6>
+      <p>{{row.des}}</p>
+      <hr>
+      <h4><strong>{{row.price}}</strong></h4>
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name = "selected" value="{{row.name}}">
+        <button type="submit" class="btn btn-primary btn-sm">Select</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script type="text/javascript" src="{%static 'assets/js/cart.js' %}"></script>
+
+{% endblock %}

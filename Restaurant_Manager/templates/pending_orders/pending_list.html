@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+  {% block title_block %}
+    <title>Pending Orders</title>
+  {% endblock %}
+
+  {% block body_block %}
+  <div class="jumbotron">
+    {% for row in dict %}
+      <h6>Date and Time: {{ row.date_time }}</h5>
+      <h6>Order ID: {{ row.order_id }}</h5>
+      <h6>Customer Name: {{ row.customer_name }}</h5>
+      <h5>Delivery Address: {{ row.address }}</h4>
+      <table width="100%" border="0">
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total</th>
+        </tr>
+        {% for item in row.ordered_items %}
+          <tr>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit_price }}</td>
+            <td>{{ item.total }}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>Total Bill</b></td>
+          <td><b>{{ row.total_bill }}</b></td>
+        </tr>
+      </table>
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name="id" value="{{ row.order_id }}">
+        <button type="submit"  class="btn btn-primary btn-sm">Confirm</button>
+      </form>
+      <br><br>
+    {% endfor %}
+
+  </div>
+
+  <style>
+    td { text-align: center }
+    th { text-align: center }
+  </style>
+  {% endblock %}

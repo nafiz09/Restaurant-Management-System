@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends "customer_login/home_login.html" %}
+{% load static %}
+
+  {% block title_block %}
+    <title>Checkout</title>
+  {% endblock %}
+
+  {% block body_block %}
+     <div class="row  st">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+        <form method="post">
+          {% csrf_token %}
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address..">
+						</div>
+					</div>
+					<hr>
+					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Confirm order">
+				</form>
+			</div>
+			<br>
+			</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+        {% for row in dict %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{% static row.pic %}"></div>
+					<div style="flex:2"><p>{{row.name}}</p></div>
+					<div style="flex:1"><p>{{row.price}}</p></div>
+					<div style="flex:1"><p>x{{row.quantity}}</p></div>
+				</div>
+        {% endfor %}
+				<h5>Total:   {{bill}}</h5>
+			</div>
+		</div>
+	</div>
+{% endblock %}

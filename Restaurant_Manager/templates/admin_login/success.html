@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+    {% block title_block %}
+    <title>Success</title>
+    {% endblock %}
+
+    {% block body_block %}
+      <div class="jumbotron">
+        <h1>Manager info successfully added</h1>
+        <h3>You can now login using given email and password</h3>
+        <a href="/admin/admin_signup" class="btn btn-primary btn-lg active" role="button" align="left" aria-pressed="true">Add Another</a>
+      </div>
+
+    {% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+    {% block title_block %}
+    <title>employees</title>
+    {% endblock %}
+
+    {% block body_block %}
+    <div class="jumbotron">
+      <h3>Employees Working:</h3>
+      <div>
+        <table width="100%"  border="1">
+          <tr style="background-color:lightgray">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Job Type</th>
+            <th>Salary</th>
+          </tr>
+          {% for row in dict %}
+          <tr>
+            <td>{{row.emp_id}}</td>
+            <td>{{row.name }}</td>
+            <td>{{row.phone}}</td>
+            <td>{{row.j_type}}</td>
+            <td>{{row.salary}}</td>
+         </tr>
+         {% endfor %}
+        </table>
+      </div>
+      <br>
+      <a href="/admin/add_employee" class="btn btn-primary btn-sm active" role="button" align="left" aria-pressed="true">Add New Employee</a>
+      <br>
+      <br>
+      <div>
+        <form method="post"> {% csrf_token %}
+          <div class="form-row col-md-4">
+            <label for="job_btn">Add A New Job Type:</label>
+            <input type="text" class="form-control" name="new_job" id="job_btn" placeholder="New Job Type">
+          </div>
+          <div class="form-row col-md-4">
+            <button type="submit" class="btn btn-primary btn-sm">Add Job</button>
+          </div>
+          <div class="form-row col-md-4">
+            {{ status }}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <style>
+      td { text-align: center }
+      th { text-align: center }
+    </style>
+    {% endblock %}

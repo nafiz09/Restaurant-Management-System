@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+    {% block title_block %}
+    <title>Expenses</title>
+    {% endblock %}
+
+    {% block body_block %}
+    <div class="jumbotron">
+      <div>
+        <form method="post"> {% csrf_token %}
+          <label for="from_date">From:</label>
+          <input type="date" id="from_date" name="from_date" value="{{ from }}">
+
+          <label for="to_date">To:</label>
+          <input type="date" id="to_date" name="to_date" value="{{ to }}">
+
+          <label for="type">Expense type:</label>
+          <select  id="type" name="type">
+            <option selected value="All">Choose..</option>
+            <option value="All">All</option>
+            {% for row in dict %}
+                <option value="{{ row.id }}">{{ row.type }}</option>
+            {% endfor %}
+          </select>
+
+          <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+
+        </form>
+      </div>
+      <br>
+      <div>
+        <table width="100%"  border="1">
+          <tr style="background-color:lightgray">
+            <th>Date and Time</th>
+            <th>Manager</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+          {% for row in dict2 %}
+          <tr>
+            <td>{{row.date}}</td>
+            <td>{{row.manager}}</td>
+            <td>{{row.category}}</td>
+            <td>{{row.desc}}</td>
+            <td>{{row.amount}}</td>
+          </tr>
+         {% endfor %}
+         <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total Expense</td>
+           <td>{{ total_expense }}</td>
+        </tr>
+        </table>
+      </div>
+
+      <a href="/expenses/add_entry" class="btn btn-primary btn-sm active" role="button" align="left" aria-pressed="true">Add New Entry</a>
+
+      <style>
+        td { text-align: center }
+        th { text-align: center }
+      </style>
+    {% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends "customer_login/home_login.html" %}
+{% load static %}
+
+{% block title_block %}
+<title>Cart</title>
+{% endblock %}
+
+{% block body_block %}
+<div class="row st">
+  <div class="col-lg-12">
+    <div class="box-element">
+
+      <a  class="btn btn-outline-dark" href="/store/">&#x2190; Continue Shopping</a>
+
+      <br>
+      <br>
+      <table class="table">
+        <tr>
+          <th>
+          </th>
+        </tr>
+      </table>
+
+    </div>
+
+    <br>
+    <div class="box-element">
+      <div class="cart-row">
+        <div style="flex:2"></div>
+        <div style="flex:2"><strong>Item</strong></div>
+        <div style="flex:1"><strong>Price</strong></div>
+        <div style="flex:1"><strong>Quantity</strong></div>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        {% for row in dict %}
+        <div class="cart-row">
+          <div style="flex:2"><img class="row-image" src="{% static row.pic %}"></div>
+          <div style="flex:2"><p>{{row.name}}</p></div>
+          <div style="flex:1"><p>{{row.price}}</p></div>
+          <div style="flex:1">
+            <input type="text" class="form-control" name="{{ row.id }}" value="{{row.quantity}}">
+
+          </div>
+        </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit" style="background: rgb(254,209,54);">Checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

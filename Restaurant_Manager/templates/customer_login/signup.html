@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "customer_login/home.html" %}
+{% load static %}
+
+  {% block title_block %}
+    <title>Sign Up</title>
+  {% endblock %}
+
+  {% block body_block %}
+  <div class="register-photo">
+      <div class="form-container">
+          <div class="image-holder" style="background: url(&quot;{% static 'assets/img/portfolio/P5.jpg' %}&quot;);"></div>
+          <form method="post">
+            {% csrf_token %}
+            <h3 color = "red">{{ status }}</h3>
+              <h2 class="text-center"><strong>Create</strong> an account.</h2>
+              <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Full Name" style="opacity: 1;"></div>
+              <div class="form-group"><input class="form-control" type="email" name="mail" placeholder="Email" style="opacity: 1;"></div>
+              <div class="form-group"><input class="form-control" type="password" name="pass" placeholder="Password"></div>
+              <div class="form-group"><input class="form-control" type="text" name="address" placeholder="Address"></div>
+              <div class="form-group"><input class="form-control" type="text" name="phone" placeholder="01xxxxxxxxx"></div>
+              <div class="form-group">
+                  <div class="form-check"><label class="form-check-label"></label></div>
+              </div>
+              <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: rgb(254,209,54);">Sign Up</button></div>
+              <a class="already" href="/login">You already have an account? Login here.</a>
+            </form>
+      </div>
+  </div>
+
+    {% endblock %}

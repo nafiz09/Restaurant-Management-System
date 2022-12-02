@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+
+    {% block title_block %}
+    <title>Add Item</title>
+    {% endblock %}
+
+    {% block body_block %}
+    <div class="jumbotron">
+      <h1>Enter Info to Add New Menu Item</h1>
+      <form action="/menu/add_item/" method="post" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="form-group">
+          <div class="form-row col-md-4">
+            <label for="inputname">Item Name</label>
+            <input type="text" class="form-control" name="item_name" id="inputname" placeholder="Enter Item Name">
+          </div>
+          <div class="form-row col-md-4">
+            <label for="inputprice">Price</label>
+            <input type="text" class="form-control" name="price" id="inputprice" placeholder="Price in Taka">
+          </div>
+          <div class="form-row col-md-4">
+            <label for="desc">Add Description</label>
+            <textarea class="form-control" name="description" id="desc" rows="3" placeholder="Add Description of The Item"></textarea>
+          </div>
+          <br>
+          <div class="form-row col-md-4">
+            <input type="file" name="menu" id="menu_pic">
+            <label for="menu_pic">Select a pic to upload</label>
+          </div>
+          <div class="form-row col-md-4">
+            <button type="submit" class="btn btn-primary">Add Item</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    {% endblock %}

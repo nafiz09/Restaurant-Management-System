@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+{% load static %}
+
+    {% block title_block %}
+    <title>Menu</title>
+    {% endblock %}
+
+    {% block body_block %}
+      <div class='jumbotron'>
+        <table width="100%"  border="1">
+          <tr style="background-color:lightgray">
+            <th>Food ID</th>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Photo</th>
+          </tr>
+          {% for row in dict %}
+          <tr>
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.price}}</td>
+            <td>{{row.desc}}</td>
+            <td><img src="{% static row.pic %}" alt="couldn't load" height="100" width="150"></img></td>
+         </tr>
+         {% endfor %}
+        </table>
+        <br>
+        <a href="/menu/add_item" class="btn btn-primary btn-sm" role="button" align="left" aria-pressed="true">Add New Item</a>
+      </div>
+
+      <style>
+        td { text-align: center }
+        th { text-align: center }
+      </style>
+
+    {% endblock %}}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends "admin_login/home_admin.html" %}
+{% load static %}
+
+    {% block title_block %}
+    <title>Place Order</title>
+    {% endblock %}
+
+    {% block body_block %}
+      <div class='jumbotron'>
+        <form  method="post"> {% csrf_token %}
+          <table width="100%"  border="1">
+            <tr style="background-color:lightgray">
+              <th>Food ID</th>
+              <th>Item Name</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Photo</th>
+              <th>Quantity</th>
+            </tr>
+            {% for row in dict %}
+            <tr>
+              <td>{{row.id}}</td>
+              <td>{{row.name}}</td>
+              <td>{{row.price}}</td>
+              <td>{{row.desc}}</td>
+              <td><img src="{% static row.pic %}" alt="couldn't load" height="100" width="150"></img></td>
+              <td><input type="text" class="form-control" name="{{ row.id }}" value="0"</td>
+           </tr>
+           {% endfor %}
+          </table>
+          <div class="form-group">
+            <div class="form-row col-md-4">
+              <label for="inputEmail4">Table No</label>
+              <input type="text" class="form-control" name="table" id="inputEmail4" placeholder="Customer Table">
+            </div>
+            <div class="form-row col-md-3 mb-3">
+              <label for="job_t">Waiter:</label>
+              <select class="custom-select" id="job_t" name="waiter">
+                <option selected disabled value="">Choose..</option>
+                {% for row in dict2 %}
+                <option value = "{{ row.name }}">{{ row.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Place order</button>
+        </form>
+        <br>
+      </div>
+
+      <style>
+        td { text-align: center }
+        th { text-align: center }
+      </style>
+
+    {% endblock %}}
